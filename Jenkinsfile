@@ -10,7 +10,7 @@ pipeline{
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'post failure'
+                //sh 'post failure'
                 // Add your test commands here
             }
         }
@@ -26,6 +26,7 @@ pipeline{
  post {
         always{
             echo "This sections runs always"
+            deleteDir()
         }
         success{
             echo "This section run when pipeline success"
