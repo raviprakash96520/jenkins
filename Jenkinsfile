@@ -10,6 +10,7 @@ pipeline{
         stage('Test') {
             steps {
                 echo 'Testing...'
+                sh 'post failure'
                 // Add your test commands here
             }
         }
