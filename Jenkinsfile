@@ -1,10 +1,11 @@
-pipeline{
+pipeline {
     agent {
         label 'AGENT-1'
     }
     options{
-        timeout(time: 10, unit: 'SECONDS')
+        timeout(time: 10, unit: 'MINUTES')
         disableConcurrentBuilds()
+        //retry(1)
     }
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
@@ -16,26 +17,24 @@ pipeline{
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-    stages{
+    stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-                // sh 'sleep 10'
-                // Add your build commands here
+                sh 'echo This is Build'
+                //sh 'sleep 10'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing...'
-                //sh 'post failure'
-                // Add your test commands here
+                sh 'echo This is test'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
-                // Add your deployment commands here
-                echo 'Deployment complete!'
+
+                    sh 'echo This is deploy'
+                    //error 'pipeline failed'
+
             }
         }
         stage('Print Params'){
@@ -44,13 +43,25 @@ pipeline{
                 echo "Biography: ${params.BIOGRAPHY}"
                 echo "Toggle: ${params.TOGGLE}"
                 echo "Choice: ${params.CHOICE}"
-                echo "Password: ${params.PASSWORD}"
+                echo "Password: ${params.PASSWORD}"  
+            }
+        }
+        stage('Approval'){
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
             }
         }
     }
 
-
- post {
+    post {
         always{
             echo "This sections runs always"
             deleteDir()
