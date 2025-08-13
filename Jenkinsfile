@@ -35,6 +35,7 @@ pipeline{
             steps {
                 echo 'Deploying...'
                 // Add your deployment commands here
+                echo 'Deployment complete!'
             }
         }
         stage('Print Params'){
