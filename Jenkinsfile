@@ -4,12 +4,13 @@ pipeline{
     }
     options{
         timeout(time: 10, unit: 'SECONDS')
+        disableConcurrentBuilds()
     }
     stages{
         stage('Build') {
             steps {
                 echo 'Building...'
-                 sh 'sleep 10'
+                // sh 'sleep 10'
                 // Add your build commands here
             }
         }
