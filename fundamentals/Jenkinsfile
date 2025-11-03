@@ -5,32 +5,34 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Hello, World!'
+                sh 'echo This is Build'
             }
         }
         stage('Test') {
             steps {
-                echo 'This is the test stage.'
+                sh 'echo This is test'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+
+                    sh 'echo This is deploy'
+                    //error 'pipeline failed'
+
             }
         }
     }
 
     post {
-        always {
-            echo 'This will always run after the stages.'
-            deleteDir
+        always{
+            echo "This sections runs always"
+            deleteDir()
         }
-        success {
-            echo 'This will run only if the pipeline succeeds.'
+        success{
+            echo "This section run when pipeline success"
         }
-        failure {
-            echo 'This will run only if the pipeline fails.'
+        failure{
+            echo "This section run when pipeline failure"
         }
     }
 }
-
