@@ -20,6 +20,7 @@ pipeline {
             steps {
 
                     sh 'echo This is deploy'
+                    sh 'sleep 10'
                     //error 'pipeline failed'
 
             }
