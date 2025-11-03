@@ -12,36 +12,34 @@ pipeline {
         appVersion = '' // this will become global, we can use across pipeline
     }
 
-    stages {
-        stage('Read the version') {
-            steps {
-                dir('fundamentals/backend') {
-                script{
-                    def packageJson = readJSON file: 'package.json'
-                    appVersion = packageJson.version
-                    echo "App version: ${appVersion}"
-                }
-            }
-            }
+     stages {
+    stage('Read the version') {
+      steps {
+        dir('fundamentals/backend') {
+          script {
+            def pkg = readJSON file: 'package.json'
+            echo "Version: ${pkg.version}"
+          }
         }
-        
-     
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Docker build') {
-            
-            steps {
-
-                    sh """
-                    docker build -t ravi6198/backend:${appVersion} .
-                    docker images
-                    """
-            }
-        }
+      }
     }
+
+    stage('Install Dependencies') {
+      steps {
+        dir('fundamentals/backend') {
+          sh 'npm install'
+        }
+      }
+    }
+
+    stage('Docker build') {
+      steps {
+        dir('fundamentals/backend') {
+          sh 'docker build -t myapp:${BUILD_NUMBER} .'
+        }
+      }
+    }
+  }
 
     post {
         always{
