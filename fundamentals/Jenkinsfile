@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'AGENT-1'
+    }
     stages {
         stage('Build') {
             steps {
@@ -21,6 +23,7 @@ pipeline {
     post {
         always {
             echo 'This will always run after the stages.'
+            deleteDir
         }
         success {
             echo 'This will run only if the pipeline succeeds.'
