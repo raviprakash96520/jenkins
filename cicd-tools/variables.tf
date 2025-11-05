@@ -1,5 +1,5 @@
 variable "zone_name" {
   type        = string
-  default     = "hitaws82s.fun"
+  default     = "daws82s.online"
   description = "description"
 }

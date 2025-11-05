@@ -12,6 +12,7 @@ xfs_growfs /var/tmp
 xfs_growfs /var
 
 yum install java-17-openjdk -y
+
 yum install -y yum-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 yum -y install terraform
@@ -28,13 +29,15 @@ systemctl start docker
 systemctl enable docker
 usermod -aG docker ec2-user
 
-# Helm
+curl -O curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.33.0/2025-05-01/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mv kubectl /usr/local/bin/kubectl
+
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 
-# Maven for Java projects
 dnf install maven -y
 
-# Python for python projects
-dnf install python3.11 gcc python3-devel -y
+
+

@@ -20,12 +20,12 @@ Restart Jenkins once plugins are installed
     * aws-creds-prod
     * aws-creds
 
-### Configure Agent
+### Configure Master and Agent
 
 ### Configure Jenkins Shared Libraries
 * Go to Manage Jenkins -> System
 * Find Global Trusted Pipeline Libraries section
 * Name as jenkins-shared-library, default version main and load implicitly
-* Location is https://github.com/daws-81s/jenkins-shared-library.git
+* Location is https://github.com/daws-82s/jenkins-shared-library.git
 
 Now Jenkins is ready to use.
